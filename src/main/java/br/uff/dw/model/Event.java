@@ -28,21 +28,21 @@ public class Event implements Serializable {
     private String image;
     private String type;
     private Double price;
-    private String local;
+    private String place;
     private Integer amount;
     @Temporal(TemporalType.DATE)
     private Calendar date;
 
     public Event() {
     }
-
+    
     public Event(String title, String description, String image, String type, Double price, String local, Integer amount, Calendar date) {
         this.title = title;
         this.description = description;
         this.image = image;
         this.type = type;
         this.price = price;
-        this.local = local;
+        this.place = local;
         this.amount = amount;
         this.date = date;
     }
@@ -104,12 +104,12 @@ public class Event implements Serializable {
         this.price = price;
     }
 
-    public String getLocal() {
-        return local;
+    public String getPlace() {
+        return place;
     }
 
-    public void setLocal(String local) {
-        this.local = local;
+    public void setPlace(String place) {
+        this.place = place;
     }
 
     public Integer getAmount() {

@@ -5,9 +5,21 @@
  */
 package br.uff.dw.control;
 
+import br.uff.dw.EventType;
+import br.uff.dw.model.Event;
+import br.uff.dw.model.User;
 import br.uff.dw.persistence.EventDAO;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -15,11 +27,47 @@ import org.springframework.stereotype.Controller;
  */
 @Controller
 public class SelectEventMenuController {
+
     //jcombobox de ordenação por ranking , pelo mais novos , por preço
     //metodo de exibir uma lista paginada dado um tipo , cinema,show ..
     //metodo exibe lista do resultado de uma busca por titulo ou descricao
     @Autowired
     private EventDAO eventDAO;
-    
-    
+
+    @RequestMapping(value = "/events", method = RequestMethod.GET)
+    public String showEvents(
+            @RequestParam(value = "page",defaultValue = "0") String page,
+            //            @RequestParam(value = "type") String type,
+            //            @RequestParam(value = "place") String place,
+            Model model) {
+
+        List<Event> eventos = new ArrayList<>();
+        List<String> pages = new ArrayList<>();
+        int n=0;
+        for (int i = 0; i < 18; i++) {
+            Calendar c = Calendar.getInstance();
+            c.set(Calendar.YEAR, 1995);
+            c.set(Calendar.MONTH, Calendar.MARCH);
+            c.set(Calendar.DAY_OF_MONTH, 20);
+            eventos.add(new Event("fabio"+i, "fabios lutam", "/img/fabio.jpg", EventType.MOVIE, 12.0, "rio de janeiro", 15, c));
+//            String title, String description, String image, String type, Double price, String local, Integer amount, Calendar date
+            if (i % 6 == 0) {
+                pages.add(n+"");
+                n++;
+            }
+        }
+        int p = Integer.parseInt(page);
+        model.addAttribute("atual", page);
+        model.addAttribute("pages", pages);
+        model.addAttribute("listEvents", eventos.subList(p*6, p*6 + 6));
+        model.addAttribute("view", "selectEvent");
+        return "template";
+    }
+
+    @RequestMapping(value = "/events", method = RequestMethod.POST)
+    public String loginResult(@ModelAttribute User novo, Model model) {
+        model.addAttribute("view", "index");
+        System.out.println(novo.getUsername());
+        return "template";
+    }
 }

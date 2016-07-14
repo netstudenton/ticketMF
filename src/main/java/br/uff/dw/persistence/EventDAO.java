@@ -15,15 +15,15 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface EventDAO extends CrudRepository<Event, Long> {
    // 
-    public List<Event> findByTitleContainingAndLocalAndType(String word, String local, String type);
+    public List<Event> findByTitleContainingAndPlaceAndType(String word, String local, String type);
 
-    public List<Event> findByDescriptionContainingAndLocalAndType(String word, String local, String type);
+    public List<Event> findByDescriptionContainingAndPlaceAndType(String word, String local, String type);
 
-    public List<Event> findByLocalAndTypeOrderByPriceAsc(String local, String type);
+    public List<Event> findByPlaceAndTypeOrderByPriceAsc(String local, String type);
 
-    public List<Event> findByLocalAndTypeOrderByPriceDesc(String local, String type);
+    public List<Event> findByPlaceAndTypeOrderByPriceDesc(String local, String type);
 
-    public List<Event> findByLocalAndTypeOrderByDateAsc(String local, String type);
+    public List<Event> findByPlaceAndTypeOrderByDateAsc(String local, String type);
 
-    public List<Event> findByLocalAndTypeOrderByAmountAsc(String local, String type);
+    public List<Event> findByPlaceAndTypeOrderByAmountAsc(String local, String type);
 }

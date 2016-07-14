@@ -21,17 +21,26 @@ public class User implements Serializable {
     @GeneratedValue
     private Long ID;
 
-    private String nome;
+    private String name;
     private String cpf;
     private String email;
-
+    private String username;
+    private String password;
     public User() {
     }
 
     public User(String nome, String cpf, String email) {
-        this.nome = nome;
+        this.name = nome;
         this.cpf = cpf;
         this.email = email;
+    }
+
+    public User(String nome, String cpf, String email, String username, String password) {
+        this.name = nome;
+        this.cpf = cpf;
+        this.email = email;
+        this.username = username;
+        this.password = password;
     }
     
     public Long getID() {
@@ -42,12 +51,12 @@ public class User implements Serializable {
         this.ID = ID;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getCpf() {
@@ -66,4 +75,20 @@ public class User implements Serializable {
         this.email = email;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
 }
