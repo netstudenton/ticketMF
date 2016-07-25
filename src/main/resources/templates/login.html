@@ -11,17 +11,16 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     </head>
     <body>
-        <div class="container" th:fragment="content">
+        <div class="col-sm-9" th:fragment="content">
             <form role="form" th:action="@{/login}" th:object="${loginmodel}" method="post">
                 <div class="form-group">
                     <label for="email">Email address:</label>
                     <input type="text" class="form-control" id="email" th:field="*{username}" />
-                </div>
-                <div class="form-group">
                     <label for="pwd">Password:</label>
                     <input type="password" class="form-control" id="pwd" th:field="*{password}" />
+                    <button type="submit" class="btn btn-default">Submit</button>
                 </div>
-                <button type="submit" class="btn btn-default">Submit</button>
+                
             </form>
         </div>
     </body>

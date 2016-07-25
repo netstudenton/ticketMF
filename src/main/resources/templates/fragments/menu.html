@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    <body>
+        <nav  class="col-sm-3" id="myScrollspy" th:fragment="menu">
+            <ul id="categories" class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="205" >
+                <li class="active"><a href="#">Novidades</a></li>
+                <li><a th:href="@{/events(type=MOVIE,place=${place})}">Movie</a></li>
+                <li><a  th:href="@{/events(type=SHOW,place=${place})}">Show</a></li> 
+                <li><a  th:href="@{/events(type=THEATER,place=${place})}">Theater</a></li>
+            </ul>
+        </nav>
+    </body>
+</html>

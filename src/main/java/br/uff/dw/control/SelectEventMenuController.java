@@ -5,7 +5,7 @@
  */
 package br.uff.dw.control;
 
-import br.uff.dw.EventType;
+import br.uff.dw.Constant;
 import br.uff.dw.model.Event;
 import br.uff.dw.model.User;
 import br.uff.dw.persistence.EventDAO;
@@ -37,37 +37,27 @@ public class SelectEventMenuController {
     @RequestMapping(value = "/events", method = RequestMethod.GET)
     public String showEvents(
             @RequestParam(value = "page",defaultValue = "0") String page,
-            //            @RequestParam(value = "type") String type,
-            //            @RequestParam(value = "place") String place,
+                      @RequestParam(value = "type",defaultValue = Constant.ALL) String type,
+                      @RequestParam(value = "place") String place,
             Model model) {
-
+        System.out.println(place);
         List<Event> eventos = new ArrayList<>();
-        List<String> pages = new ArrayList<>();
-        int n=0;
-        for (int i = 0; i < 18; i++) {
-            Calendar c = Calendar.getInstance();
-            c.set(Calendar.YEAR, 1995);
-            c.set(Calendar.MONTH, Calendar.MARCH);
-            c.set(Calendar.DAY_OF_MONTH, 20);
-            eventos.add(new Event("fabio"+i, "fabios lutam", "/img/fabio.jpg", EventType.MOVIE, 12.0, "rio de janeiro", 15, c));
-//            String title, String description, String image, String type, Double price, String local, Integer amount, Calendar date
-            if (i % 6 == 0) {
-                pages.add(n+"");
-                n++;
-            }
+        if(place!=null){
+            eventos = eventDAO.findByPlaceAndTypeOrderByPriceAsc(place, type);
         }
+        List<String> pages = new ArrayList<>();
+        int n = eventos.size()/6;
+        if((eventos.size()%6)!=0){
+            n++;
+        }
+            for (int i = 0; i < n; i++) {
+                pages.add(i+"");
+            }
         int p = Integer.parseInt(page);
         model.addAttribute("atual", page);
         model.addAttribute("pages", pages);
         model.addAttribute("listEvents", eventos.subList(p*6, p*6 + 6));
         model.addAttribute("view", "selectEvent");
-        return "template";
-    }
-
-    @RequestMapping(value = "/events", method = RequestMethod.POST)
-    public String loginResult(@ModelAttribute User novo, Model model) {
-        model.addAttribute("view", "index");
-        System.out.println(novo.getUsername());
         return "template";
     }
 }

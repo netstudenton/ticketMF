@@ -15,5 +15,6 @@ import org.springframework.data.repository.CrudRepository;
 public interface UserDAO extends CrudRepository<User,Long>{
     
     public User findByEmail(String email);
+    public User findByUsernameAndPassword(String username,String password);
     public User findByCpf(String cpf);
 }
