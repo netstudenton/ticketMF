@@ -14,13 +14,14 @@ and open the template in the editor.
         <div class="col-sm-9" th:fragment="content">
             <form role="form" th:action="@{/buy}" th:object="${buyModel}" method="post">
                 <div class="form-group">
+                    <h1>Insert your creditcard credencials </h1>
                     <label for="name">name:</label>
                     <input type="text" class="form-control" id="name" th:field="*{name}" />
-                    <label for="number">number:</label>
+                    <label for="number">credit number:</label>
                     <input type="text" class="form-control" id="number" th:field="*{number}" />
                     <label for="date">date:</label>
                     <input type="text" class="form-control" id="date" th:field="*{date}" />
-                    <label for="code">code:</label>
+                    <label for="code">CVV:</label>
                     <input type="text" class="form-control" id="code" th:field="*{code}" />
                     <label for="title">title:</label>
                     <input type="text" class="form-control" id="title" th:field="*{title}" value="${buyModel.title}"/>
