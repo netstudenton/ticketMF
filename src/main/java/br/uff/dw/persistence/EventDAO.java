@@ -15,9 +15,7 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface EventDAO extends CrudRepository<Event, Long> {
    // 
-    public List<Event> findByTitleContainingAndPlaceAndType(String word, String local, String type);
-
-    public List<Event> findByDescriptionContainingAndPlaceAndType(String word, String local, String type);
+    public List<Event> findByTitleContainingOrDescriptionContaining(String word,String word2);
 
     public List<Event> findByPlaceAndTypeOrderByPriceAsc(String local, String type);
 

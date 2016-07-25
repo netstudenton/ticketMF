@@ -27,28 +27,38 @@ public class TicketsApplication {
         EventDAO eventDAO = config.getBean("eventDAO", EventDAO.class);
         Calendar c11 = Calendar.getInstance();
         c11.set(2016, 6, 28);
-        Event e11 = new Event("procurando dolly", "dolly sumiu", "1.jpeg", Constant.MOVIE, 12.0, "Rio de Janeiro", 30, c11);
+        Event e11 = new Event("procurando dolly", "dolly sumiu", "fabio.jpg", Constant.MOVIE, 12.0, "Rio de Janeiro", 30, c11);
         eventDAO.save(e11);
 
         Calendar c12 = Calendar.getInstance();
         c12.set(2016, 6, 25);
-        Event e12 = new Event("quarteto fantastico", "4 herois", "1.jpeg", Constant.MOVIE, 8.0, "Rio de Janeiro", 40, c12);
+        Event e12 = new Event("quarteto fantastico", "4 herois", "fabio.jpg", Constant.MOVIE, 8.0, "Rio de Janeiro", 40, c12);
         eventDAO.save(e12);
 
         Calendar c13 = Calendar.getInstance();
         c12.set(2016, 6, 26);
-        Event e13 = new Event("efeito borboleta 10", "viagem no tempo", "1.jpeg", Constant.MOVIE, 10.0, "Rio de Janeiro", 20, c13);
+        Event e13 = new Event("efeito borboleta 10", "viagem no tempo", "fabio.jpg", Constant.MOVIE, 10.0, "Rio de Janeiro", 20, c13);
         eventDAO.save(e13);
 
         Calendar c2 = Calendar.getInstance();
         c2.set(2016, 6, 14);
-        Event e2 = new Event("fantastico mundo de dolly", "menina em um universo paralelo", "2.jpeg", Constant.THEATER, 12.0, "Rio de Janeiro", 20, c2);
+        Event e2 = new Event("fantastico mundo de dolly", "menina em um universo paralelo", "fabio.jpg", Constant.THEATER, 12.0, "Rio de Janeiro", 20, c2);
         eventDAO.save(e2);
 
         Calendar c3 = Calendar.getInstance();
         c3.set(2016, 7, 14);
-        Event e3 = new Event("system of down", "venha ver o show do system", "2.jpeg", Constant.SHOW, 42.0, "Rio de Janeiro", 20, c3);
+        Event e3 = new Event("system of down", "venha ver o show do system", "fabio.jpg", Constant.SHOW, 42.0, "Rio de Janeiro", 20, c3);
         eventDAO.save(e3);
+        
+        Calendar c14 = Calendar.getInstance();
+        c14.set(2016, 6, 28);
+        Event e14 = new Event("procurando dolly", "dolly sumiu", "fabio.jpg", Constant.MOVIE, 12.0, "Niteroi", 30, c11);
+        eventDAO.save(e14);
+
+        Calendar c15 = Calendar.getInstance();
+        c15.set(2016, 6, 25);
+        Event e15 = new Event("quarteto fantastico", "4 herois", "fabio.jpg", Constant.MOVIE, 8.0, "Rio de Janeiro", 40, c12);
+        eventDAO.save(e15);
 
 //        Calendar c4 = Calendar.getInstance();
 //        c4.set(2016, 5, 14);

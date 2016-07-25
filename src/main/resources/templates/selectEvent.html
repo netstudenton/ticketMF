@@ -11,9 +11,9 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     </head>
     <body>
-        <div class="container" th:fragment="content">
-            <div th:each="event : ${listEvents}"  >
-                <div class="col-sm-6 col-md-4">
+        <div class="col-sm-6 col-md-4" th:fragment="content">
+            <div class="container">
+                <div class="col-sm-6 col-md-4" th:each="event : ${listEvents}"  >
                     <div class="thumbnail">
                         <img th:src="${event.image}" alt="..." />
                         <div class="caption">
@@ -24,9 +24,6 @@ and open the template in the editor.
                     </div>
                 </div>
             </div>
-            <ul class="pagination pagination-lg" th:each="p : ${pages}">
-                <li th:class="${p}==${atual}?'active':''"><a th:href="@{'/events'(page=${p})}" th:text="${p}"></a></li>     
-            </ul>
         </div>
     </body>
 </html>

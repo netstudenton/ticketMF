@@ -5,6 +5,7 @@
  */
 package br.uff.dw.model;
 
+import br.uff.dw.Constant;
 import java.io.Serializable;
 import java.util.Calendar;
 import javax.persistence.Entity;
@@ -39,7 +40,7 @@ public class Event implements Serializable {
     public Event(String title, String description, String image, String type, Double price, String local, Integer amount, Calendar date) {
         this.title = title;
         this.description = description;
-        this.image = image;
+        this.image = Constant.IMGPATH + image;
         this.type = type;
         this.price = price;
         this.place = local;
@@ -77,6 +78,7 @@ public class Event implements Serializable {
     }
 
     public void setImage(String image) {
+        image = Constant.IMGPATH + image;
         this.image = image;
     }
 
