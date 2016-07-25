@@ -36,27 +36,31 @@ public class SelectEventMenuController {
 
     @RequestMapping(value = "/events", method = RequestMethod.GET)
     public String showEvents(
-            @RequestParam(value = "page",defaultValue = "0") String page,
-                      @RequestParam(value = "type",defaultValue = Constant.ALL) String type,
-                      @RequestParam(value = "place") String place,
+            @RequestParam(value = "page", defaultValue = "0") String page,
+            @RequestParam(value = "type", defaultValue = Constant.ALL) String type,
+            @RequestParam(value = "place") String place,
             Model model) {
         System.out.println(place);
         List<Event> eventos = new ArrayList<>();
-        if(place!=null){
+        if (place != null) {
             eventos = eventDAO.findByPlaceAndTypeOrderByPriceAsc(place, type);
         }
         List<String> pages = new ArrayList<>();
-        int n = eventos.size()/6;
-        if((eventos.size()%6)!=0){
+        int n = eventos.size() / 6;
+        if ((eventos.size() % 6) != 0) {
             n++;
         }
-            for (int i = 0; i < n; i++) {
-                pages.add(i+"");
-            }
+        for (int i = 0; i < n; i++) {
+            pages.add(i + "");
+        }
         int p = Integer.parseInt(page);
         model.addAttribute("atual", page);
         model.addAttribute("pages", pages);
-        model.addAttribute("listEvents", eventos.subList(p*6, p*6 + 6));
+        if (n > 0) {
+            model.addAttribute("listEvents", eventos.subList(p * 6, p * 6 + 6));
+        } else {
+            model.addAttribute("listEvents", eventos);
+        }
         model.addAttribute("view", "selectEvent");
         return "template";
     }
