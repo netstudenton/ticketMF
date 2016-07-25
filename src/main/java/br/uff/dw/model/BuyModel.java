@@ -12,7 +12,7 @@ package br.uff.dw.model;
 public class BuyModel {
     private String name;
     private String number;
-    private String validate;
+    private String date;
     private String code;
     private String title;
     private String eventID;
@@ -27,7 +27,7 @@ public class BuyModel {
     public BuyModel(String name, String number, String validate, String code, String title, String eventID) {
         this.name = name;
         this.number = number;
-        this.validate = validate;
+        this.date = validate;
         this.code = code;
         this.title = title;
         this.eventID = eventID;
@@ -50,12 +50,12 @@ public class BuyModel {
         this.number = number;
     }
 
-    public String getValidate() {
-        return validate;
+    public String getDate() {
+        return date;
     }
 
-    public void setValidate(String validate) {
-        this.validate = validate;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getCode() {

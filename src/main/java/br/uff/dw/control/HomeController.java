@@ -121,33 +121,49 @@ public class HomeController {
 
     @RequestMapping(value = "/buy", method = RequestMethod.GET)
     public String buyEvent(
-             @RequestParam(value = "title") String type,
-            @RequestParam(value = "id") String place,
+            @RequestParam(value = "title") String title,
+            @RequestParam(value = "id") String id,
             Model model) {
-        
+
         model.addAttribute("view", "purchase");
         model.addAttribute("findModel", new FindModel());
         model.addAttribute("user", user);
-        model.addAttribute("buyModel", new BuyModel());
+        model.addAttribute("buyModel", new BuyModel(title, id));
         return "template";
     }
-    @RequestMapping(value = "/buy", method = RequestMethod.GET)
-    public String buyEventResult(@ModelAttribute BuyModel novo,Model model) {
+
+    @RequestMapping(value = "/buy", method = RequestMethod.POST)
+    public String buyEventResult(@ModelAttribute BuyModel novo, Model model) {
         Event e = eventDAO.findOne(Long.parseLong(novo.getEventID()));
         Purchase pu = purchaseDAO.findByUserAndEvent(user, e);
-        if(pu!=null){
-            if(pu.getAmount()<4){
-                pu.setAmount(pu.getAmount()+1);
-                purchaseDAO.save(pu);
-                model.addAttribute("view", "index");
-            }else{
-                model.addAttribute("view", "error");
-                model.addAttribute("message", "você alcançou limite de tickets para este evento");
+        if (user == null) {
+            model.addAttribute("view", "error");
+            model.addAttribute("message", "não ha usuario logado");
+        } else if (e.getAmount() > 0) {
+            if (pu != null) {
+                if (pu.getAmount() < 4) {
+                    e.setAmount(e.getAmount() - 1);
+                    e = eventDAO.save(e);
+                    pu.setAmount(pu.getAmount() + 1);
+                    pu = purchaseDAO.save(pu);
+                    model.addAttribute("view", "print");
+                    model.addAttribute("purchase", pu);
+                } else {
+                    model.addAttribute("view", "error");
+                    model.addAttribute("message", "você alcançou limite de tickets para este evento");
+                }
+            } else {
+                e.setAmount(e.getAmount() - 1);
+                e = eventDAO.save(e);
+                pu = new Purchase(1, user, e);
+                pu = purchaseDAO.save(pu);
+
+                model.addAttribute("view", "print");
+                model.addAttribute("purchase", pu);
             }
-        }else{
-            pu = new Purchase(1, user, e);
-            purchaseDAO.save(pu);
-            model.addAttribute("view", "index");
+        } else {
+            model.addAttribute("view", "error");
+            model.addAttribute("message", "não ha mais ingressos");
         }
         model.addAttribute("findModel", new FindModel());
         model.addAttribute("user", user);

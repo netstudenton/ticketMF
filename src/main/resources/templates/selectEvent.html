@@ -19,7 +19,7 @@ and open the template in the editor.
                         <div class="caption">
                             <h3 th:text="${event.title}"></h3>
                             <p th:text="${event.description}"></p>
-                            <p><a href="#" class="btn btn-primary" role="button">Buy</a></p>
+                            <p><a th:if="${user != null}" th:href="@{/buy(title=${event.title},id=${event.ID})}" class="btn btn-primary" role="button">Buy</a></p>
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    <body>
+        <div class="col-sm-9" th:fragment="content">
+            <div id="printable" class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Name</div>
+                    <div class="panel-body" th:text="${purchase.user.name}"></div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">CPF</div>
+                    <div class="panel-body" th:text="${purchase.user.cpf}"></div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Title</div>
+                    <div class="panel-body" th:text="${purchase.event.title}"></div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Price</div>
+                    <div class="panel-body" th:text="${purchase.event.price}"></div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Place</div>
+                    <div class="panel-body" th:text="${purchase.event.place}"></div>
+                </div>
+            </div>
+            <button class="btn btn-default" href="#" onclick="window.print();">Imprimir Página</button>
+        </div>
+    </body>
+</html>

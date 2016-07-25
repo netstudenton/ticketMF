@@ -12,12 +12,19 @@ and open the template in the editor.
     </head>
     <body>
         <div class="col-sm-9" th:fragment="content">
-            <form role="form" th:action="@{/buy}" th:object="${loginmodel}" method="post">
+            <form role="form" th:action="@{/buy}" th:object="${buyModel}" method="post">
                 <div class="form-group">
-                    <label for="email">Email address:</label>
-                    <input type="text" class="form-control" id="email" th:field="*{username}" />
-                    <label for="pwd">Password:</label>
-                    <input type="password" class="form-control" id="pwd" th:field="*{password}" />
+                    <label for="name">name:</label>
+                    <input type="text" class="form-control" id="name" th:field="*{name}" />
+                    <label for="number">number:</label>
+                    <input type="text" class="form-control" id="number" th:field="*{number}" />
+                    <label for="date">date:</label>
+                    <input type="text" class="form-control" id="date" th:field="*{date}" />
+                    <label for="code">code:</label>
+                    <input type="text" class="form-control" id="code" th:field="*{code}" />
+                    <label for="title">title:</label>
+                    <input type="text" class="form-control" id="title" th:field="*{title}" value="${buyModel.title}"/>
+                    <input type="hidden" class="form-control" th:field="*{eventID}" value="${buyModel.eventID}" />
                     <button type="submit" class="btn btn-default">Submit</button>
                 </div>
                 

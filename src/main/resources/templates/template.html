@@ -17,14 +17,14 @@ and open the template in the editor.
         <script type="text/javascript">
 //                           var str =  String(itens[j].attr('href'));
 //                           res = res.substring(0, res.indexOf('place=') + 6);
-           $(document).on('click', '.dropdown-menu li a', function () {
+            $(document).on('click', '.dropdown-menu li a', function () {
                 $('#selectPlace').val($(this).html());
             });
             $(document).on('click', '#categories li a', function () {
-               var link =  $(this).attr('href');
-               var texto = String(link);
-               texto = texto.substring(0, texto.indexOf('place=') + 6);
-               $(this).attr('href', texto + $('#selectPlace').val());
+                var link = $(this).attr('href');
+                var texto = String(link);
+                texto = texto.substring(0, texto.indexOf('place=') + 6);
+                $(this).attr('href', texto + $('#selectPlace').val());
             });
         </script>
 
@@ -53,7 +53,21 @@ and open the template in the editor.
                 font-size: 28px;
             }
         </style>
-
+        <style>
+            @media print {
+                body * {
+                    visibility: hidden;
+                }
+                #printable, #printable * {
+                    visibility: visible;
+                }
+                #printable {
+                    position: fixed;
+                    left: 0;
+                    top: 0;
+                }
+            }
+        </style>
     </head>
     <body data-spy="scroll" data-target=".navbar #myScrollspy" data-offset="50">
         <div class="container-fluid" style="background-color:#fff;height:200px;">
