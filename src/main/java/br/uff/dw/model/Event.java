@@ -31,13 +31,12 @@ public class Event implements Serializable {
     private Double price;
     private String place;
     private Integer amount;
-    @Temporal(TemporalType.DATE)
-    private Calendar date;
+ 
 
     public Event() {
     }
     
-    public Event(String title, String description, String image, String type, Double price, String local, Integer amount, Calendar date) {
+    public Event(String title, String description, String image, String type, Double price, String local, Integer amount) {
         this.title = title;
         this.description = description;
         this.image = Constant.IMGPATH + image;
@@ -45,7 +44,6 @@ public class Event implements Serializable {
         this.price = price;
         this.place = local;
         this.amount = amount;
-        this.date = date;
     }
     
 
@@ -88,14 +86,6 @@ public class Event implements Serializable {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public Calendar getDate() {
-        return date;
-    }
-
-    public void setDate(Calendar date) {
-        this.date = date;
     }
 
     public Double getPrice() {

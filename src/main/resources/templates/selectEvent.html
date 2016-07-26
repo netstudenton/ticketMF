@@ -11,14 +11,22 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     </head>
     <body>
-        <div class="col-sm-6 col-md-4" th:fragment="content">
+        <div class="col-sm-9" th:fragment="content">
             <div class="container">
-                <div class="col-sm-6 col-md-4" th:each="event : ${listEvents}"  >
+                <div class="col-sm-6 col-xs-6 col-md-4" th:each="event : ${listEvents}"  >
                     <div class="thumbnail">
                         <img th:src="${event.image}" alt="..." />
                         <div class="caption">
-                            <h3 th:text="${event.title}"></h3>
-                            <p th:text="${event.description}"></p>
+                            <label class="label label-primary" th:for="${#ids.next('title')}">Title</label>
+                            <h3 id="title" th:text="${event.title}"></h3>
+                            <label class="label label-primary" th:for="${#ids.next('description')}">Description</label>
+                            <p id="description" th:text="${event.description}"></p>
+                            <label class="label label-primary" th:for="${#ids.next('price')}">Price</label>
+                            <p id="price" th:text="${event.price}"></p>
+                            <label class="label label-primary" th:for="${#ids.next('amount')}">Amount</label>
+                            <p id="amount" th:text="${event.amount}"></p>
+                            <label class="label label-primary" th:for="${#ids.next('place')}">Place</label>
+                            <p id="place" th:text="${event.place}"></p>
                             <p><a th:if="${user != null}" th:href="@{/buy(title=${event.title},id=${event.ID})}" class="btn btn-primary" role="button">Buy</a></p>
                         </div>
                     </div>

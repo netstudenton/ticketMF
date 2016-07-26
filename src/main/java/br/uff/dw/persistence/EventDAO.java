@@ -21,7 +21,5 @@ public interface EventDAO extends CrudRepository<Event, Long> {
 
     public List<Event> findByPlaceAndTypeOrderByPriceDesc(String local, String type);
 
-    public List<Event> findByPlaceAndTypeOrderByDateAsc(String local, String type);
-
     public List<Event> findByPlaceAndTypeOrderByAmountAsc(String local, String type);
 }

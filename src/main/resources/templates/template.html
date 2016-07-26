@@ -14,20 +14,6 @@ and open the template in the editor.
         <script th:src="@{/js/jquery-1.12.1.js}"></script>
         <script th:src="@{/js/bootstrap.js}"></script>
 
-        <script type="text/javascript">
-//                           var str =  String(itens[j].attr('href'));
-//                           res = res.substring(0, res.indexOf('place=') + 6);
-            $(document).on('click', '.dropdown-menu li a', function () {
-                $('#selectPlace').val($(this).html());
-            });
-            $(document).on('click', '#categories li a', function () {
-                var link = $(this).attr('href');
-                var texto = String(link);
-                texto = texto.substring(0, texto.indexOf('place=') + 6);
-                $(this).attr('href', texto + $('#selectPlace').val());
-            });
-        </script>
-
         <style>
             body {
                 position: relative;
@@ -47,10 +33,6 @@ and open the template in the editor.
             }
             .affix {
                 top: 80px;
-            }
-            div.col-sm-9 div {
-                height: 250px;
-                font-size: 28px;
             }
         </style>
         <style>
@@ -78,6 +60,5 @@ and open the template in the editor.
 
         <div th:replace="fragments/menu :: menu"></div>
         <div th:replace="${view} :: content"></div>
-        <input type="hidden" id="selectPlace" value="Rio de Janeiro" />
     </body>
 </html>

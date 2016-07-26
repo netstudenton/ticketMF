@@ -13,9 +13,9 @@ and open the template in the editor.
     <body>
         <nav  class="col-sm-3" id="myScrollspy" th:fragment="menu">
             <ul id="categories" class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="205" >
-                <li><a th:href="@{/events(type=MOVIE,place=${place})}">Movie</a></li>
-                <li><a  th:href="@{/events(type=SHOW,place=${place})}">Show</a></li> 
-                <li><a  th:href="@{/events(type=THEATER,place=${place})}">Theater</a></li>
+                <li><a th:href="@{/events(type=MOVIE)}">Movie</a></li>
+                <li><a  th:href="@{/events(type=SHOW)}">Show</a></li> 
+                <li><a  th:href="@{/events(type=THEATER)}">Theater</a></li>
             </ul>
         </nav>
     </body>

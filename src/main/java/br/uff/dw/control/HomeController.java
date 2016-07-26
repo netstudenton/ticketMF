@@ -42,12 +42,13 @@ public class HomeController {
     @Autowired
     private PurchaseDAO purchaseDAO;
     private User user;
+    private String local = "Rio de Janeiro";
 
     @RequestMapping("/")
     public String index(Model model) {
-        model.addAttribute("now", LocalDateTime.now());
         model.addAttribute("view", "index");
         model.addAttribute("user", user);
+        model.addAttribute("local", local);
         model.addAttribute("findModel", new FindModel());
         return "template";
     }
@@ -58,15 +59,23 @@ public class HomeController {
         model.addAttribute("view", "login");
         model.addAttribute("user", user);
         model.addAttribute("findModel", new FindModel());
+        model.addAttribute("local", local);
         return "template";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String loginResult(@ModelAttribute LoginModel loginmodel, Model model) {
-        model.addAttribute("view", "index");
+
         user = userDAO.findByUsernameAndPassword(loginmodel.getUsername(), loginmodel.getPassword());
+        if (user == null) {
+            model.addAttribute("view", "error");
+            model.addAttribute("message", "usuario não existe");
+        } else {
+            model.addAttribute("view", "index");
+        }
         model.addAttribute("user", user);
         model.addAttribute("findModel", new FindModel());
+        model.addAttribute("local", local);
         return "template";
     }
 
@@ -76,33 +85,38 @@ public class HomeController {
         model.addAttribute("view", "signup");
         model.addAttribute("user", user);
         model.addAttribute("findModel", new FindModel());
+        model.addAttribute("local", local);
         return "template";
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String signupResult(@ModelAttribute User novo, Model model) {
-        model.addAttribute("view", "index");
-        user = userDAO.save(novo);
+
+        User test = userDAO.findByEmail(novo.getEmail());
+        if (test == null) {
+            user = userDAO.save(novo);
+            model.addAttribute("view", "index");
+        } else {
+            model.addAttribute("view", "error");
+            model.addAttribute("message", "usuario Ja existe");
+        }
         model.addAttribute("user", user);
         model.addAttribute("findModel", new FindModel());
-        System.out.println(novo.getUsername());
+        model.addAttribute("local", local);
         return "template";
     }
 
     @RequestMapping(value = "/events", method = RequestMethod.GET)
     public String showEvents(
             @RequestParam(value = "type", defaultValue = Constant.ALL) String type,
-            @RequestParam(value = "place") String place,
             Model model) {
-        System.out.println(place);
         List<Event> eventos = new ArrayList<>();
-        if (place != null) {
-            eventos = eventDAO.findByPlaceAndTypeOrderByPriceAsc(place, type);
-        }
+        eventos = eventDAO.findByPlaceAndTypeOrderByPriceAsc(local, type);
         model.addAttribute("listEvents", eventos);
         model.addAttribute("view", "selectEvent");
         model.addAttribute("findModel", new FindModel());
         model.addAttribute("user", user);
+        model.addAttribute("local", local);
         return "template";
     }
 
@@ -116,6 +130,7 @@ public class HomeController {
         model.addAttribute("view", "selectEvent");
         model.addAttribute("findModel", new FindModel());
         model.addAttribute("user", user);
+        model.addAttribute("local", local);
         return "template";
     }
 
@@ -129,6 +144,7 @@ public class HomeController {
         model.addAttribute("findModel", new FindModel());
         model.addAttribute("user", user);
         model.addAttribute("buyModel", new BuyModel(title, id));
+        model.addAttribute("local", local);
         return "template";
     }
 
@@ -167,6 +183,19 @@ public class HomeController {
         }
         model.addAttribute("findModel", new FindModel());
         model.addAttribute("user", user);
+        model.addAttribute("local", local);
+        return "template";
+    }
+
+    @RequestMapping(value = "/change", method = RequestMethod.GET)
+    public String changeLocal(
+            @RequestParam(value = "p") String place,
+            Model model) {
+        local = place;
+        model.addAttribute("view", "index");
+        model.addAttribute("user", user);
+        model.addAttribute("local", local);
+        model.addAttribute("findModel", new FindModel());
         return "template";
     }
 }

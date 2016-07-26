@@ -29,8 +29,8 @@ and open the template in the editor.
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Place
                                 <span class="caret"></span></a>
                             <ul class="dropdown-menu" id="placelist" >
-                                <li><a id="place" href="#">Rio de Janeiro</a></li>
-                                <li><a id="place" href="#">Niteroi</a></li>
+                                <li><a id="place" th:href="@{/change(p='Rio de Janeiro')}">Rio de Janeiro</a></li>
+                                <li><a id="place" th:href="@{/change(p='Niteroi')}">Niteroi</a></li>
                             </ul>
                         </li>
                     </ul>

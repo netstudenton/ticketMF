@@ -11,9 +11,9 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     </head>
     <body>
-        <div class="col-sm-6 col-md-4" th:fragment="content">
-            <div class="container">
-                <h3 th:text="${error.message}"></h3>
+        <div class="col-sm-9" th:fragment="content">
+            <div class="alert alert-danger">
+                <h3 th:text="${message}"></h3>
             </div>
         </div>
     </body>
